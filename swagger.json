@@ -1,0 +1,330 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Mycarehub Endpoints..",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/api"
+    },
+    {
+      "url": "https://mycarehub-310700.ts.r.appspot.com/api"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Application Running Status",
+      "description": "Status"
+    }
+  ],
+  "paths": {
+    "/signup": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/signup"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/login"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Something went wrong"
+          }
+        }
+      }
+    },
+    "/get_user_details": {
+      "get": {
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/update_user_details": {
+      "post": {
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/save_emergency_contacts": {
+      "post": {
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/emergency_contacts"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "login": {
+        "required": [
+          "password",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "siva.yekula@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "12345678"
+          }
+        }
+      },
+      "signup": {
+        "required": [
+          "confirm_password",
+          "email",
+          "first_name",
+          "last_name",
+          "password",
+          "phone",
+          "type",
+          "user_type"
+        ],
+        "type": "object",
+        "properties": {
+          "user_type": {
+            "type": "string",
+            "example": "supportworker"
+          },
+          "type": {
+            "type": "string",
+            "example": "someone"
+          },
+          "first_name": {
+            "type": "string",
+            "example": "test"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "sample"
+          },
+          "phone": {
+            "type": "string",
+            "example": "919032732879"
+          },
+          "email": {
+            "type": "string",
+            "example": "siva.yekula@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "confirm_password": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "participant_phone": {
+            "type": "string",
+            "example": "919390700500"
+          },
+          "participant_first_name": {
+            "type": "string",
+            "example": "test1"
+          },
+          "participant_email": {
+            "type": "string",
+            "example": "siva.yekula+1@gmail.com"
+          },
+          "participant_last_name": {
+            "type": "string",
+            "example": "sample1"
+          }
+        }
+      },
+      "user": {
+        "required": [
+          "address",
+          "email",
+          "first_name",
+          "gender",
+          "last_name",
+          "phone"
+        ],
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "type": "string",
+            "example": "test"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "sample"
+          },
+          "phone": {
+            "type": "string",
+            "example": "9032732879"
+          },
+          "email": {
+            "type": "string",
+            "example": "siva.yekula@gmail.com"
+          },
+          "address": {
+            "type": "object",
+            "properties": {},
+            "example": {
+              "address_line": "1-92, mainroad",
+              "state": "AP",
+              "suburb": "IND",
+              "postcode": "521369"
+            }
+          },
+          "gender": {
+            "type": "string",
+            "example": "male"
+          }
+        }
+      },
+      "emergency_contacts": {
+        "required": [
+          "email",
+          "first_name",
+          "last_name",
+          "phone",
+          "relation"
+        ],
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "type": "string",
+            "example": "test"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "sample"
+          },
+          "phone": {
+            "type": "string",
+            "example": "9032732879"
+          },
+          "email": {
+            "type": "string",
+            "example": "siva.yekula@gmail.com"
+          },
+          "relation": {
+            "type": "string",
+            "example": "brother"
+          }
+        }
+      }
+    }
+  }
+}
